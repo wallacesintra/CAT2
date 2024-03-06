@@ -5,11 +5,7 @@ const cat = document.getElementById('cat');
 const exam = document.getElementById('final_exam');
 
 const submit = document.getElementById('submit');
-
-// const assign1Value = parseInt(assign1.value);
-// const assign2Value = parseInt(assign2.value);
-// const catValue = parseInt(cat.value);
-// const examValue = parseInt(exam.value);
+const view = document.getElementById('view_students');
 
 var student = {}
 var students_data = []
@@ -39,11 +35,40 @@ submit.addEventListener('click', () => {
         students_data.push(student);
         console.log(student);
         console.log(students_data);
+
+        student_name.value = '';
+        assign1.value = '';
+        assign2.value = '';
+        cat.value = '';
+        exam.value = '';
+        
+
     }
 
-    alert(`Total marks: ${assign1Value + assign2Value + catValue + examValue}`);
-    alert(student.assign1);
+    // alert(`Total marks: ${assign1Value + assign2Value + catValue + examValue}`);
+    // alert(student.assign1);
     // Rest of your code here
 });
 
-console.log(students_data)
+// console.log(students_data)
+
+if (students_data.length > 0) {
+    students_data.forEach((student) => {
+        console.log(student)
+    });
+}
+
+view.addEventListener('click', () => {
+    event.preventDefault();
+    let result = '';
+    if (students_data.length > 0) {
+        students_data.forEach((student) => {
+            result += `<p>Student Name: ${student.name} Assign1: ${student.assign1Value} Assign2: ${student.assign2Value} CAT: ${student.catValue}  Exam: ${student.examValue} Total Score: ${student.totalScore}</p>`
+        });
+        document.getElementById('student_result').innerHTML = result;
+
+    }
+    else {
+        alert('No students data available');
+    }
+});
